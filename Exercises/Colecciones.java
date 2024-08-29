@@ -6,10 +6,10 @@ import java.util.HashMap;
 
 
 public class Colecciones {
-    ArrayList<String> cars ;
-    String[] bikes;
-    Set<String> bicicles;
-    HashMap<Integer, String> transport;
+    public ArrayList<String> cars ;
+    public String[] bikes;
+    public Set<String> bicicles;
+    public HashMap<Integer, String> transport;
 
     public Colecciones(){
         this.cars = new ArrayList<String>();
@@ -39,9 +39,31 @@ public class Colecciones {
     }
 
     public HashMap<Integer, String>  obtenerHash(){
-        int length = cars.size() + bikes.length + bicicles.size();// obtener tamaño
-        int count =1;
-        //this.transport.forEach((key, value) -> System.out.println(key + " " + value)); //imprimir para pruebas
+        
+        Set<String> uniqueElements = new HashSet<>();
+
+        for (String car : cars) {
+            if(car != null && !car.trim().isEmpty()) {
+                uniqueElements.add(car);
+            }
+        }
+
+        for (String bike : bikes) {
+            if(bike != null && !bike.trim().isEmpty()) {
+                uniqueElements.add(bike);
+            }
+        }
+
+        uniqueElements.addAll(bicicles);
+
+        HashMap<Integer, String> transportMap = new HashMap<>();
+        int count = 1;
+        for (String element : uniqueElements) {
+            transportMap.put(count++, element);
+        }
+        this.transport = transportMap;
+
         return this.transport;
     }
+    
 }
